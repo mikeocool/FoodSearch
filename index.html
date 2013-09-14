@@ -1,0 +1,63 @@
+<html>
+<head>
+    <title>Food Search</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" type="text/css" href="css/base.css">
+    <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+    <script src="js/config.js"></script>
+    <script src="js/handlebars.js"></script>
+    <script type="text/x-handlebars-template" id="result-template">
+        <li>
+            <a href="{{link}}">{{title}}</a>
+            <span class="uri">{{ formattedUrl }}</span>
+            <img width="100" src="{{pagemap.cse_thumbnail.0.src}}">
+            <p>{{{htmlSnippet}}}</p>
+        </li>
+    </script>
+    <script>
+
+        var pageCount = 10;
+        var resultTemplate = Handlebars.compile($('#result-template').html());
+
+        var search = function(query, page) {
+            if( ! page) { page = 1; }
+            var startIdx = (page * pageCount) - pageCount + 1;
+            $.ajax('https://www.googleapis.com/customsearch/v1', {
+                data:{
+                    key:config.gApiKey,
+                    cx:config.cseCx,
+                    num:pageCount,
+                    q:query,
+                    start:startIdx
+                },
+                crossDomain:true,
+                dataType:'json',
+                success: function(data){
+                    console.log(data);
+
+                    var results = data['items'];
+                    for(var i = 0; i < results.length; i++) {
+                        $(resultTemplate(results[i])).appendTo('#results');
+                    }
+                }
+            });
+        }
+
+        $(document).ready(function(){
+            var currentSearch = 'Tomatillos';
+            var currentPage = 1;
+            search(currentSearch, currentPage);
+
+            $('#next').click(function(e){
+                e.preventDefault();
+                currentPage += 1;
+                search(currentSearch, currentPage);
+            });
+        });
+    </script>
+</head>
+<body>
+    <ul id="results"></ul>
+    <a id="next" href="#">Next</a>
+  </body>
+</html>
