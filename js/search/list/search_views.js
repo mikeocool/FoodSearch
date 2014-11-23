@@ -33,12 +33,35 @@ FoodSearchApp.module("Search.List", function(List, FoodSearchApp, Backbone, Mari
         }
     });
 
+    List.EmptyResult = Marionette.ItemView.extend({
+        template: "#no-search-results"
+    });
+
     List.SearchResults = Marionette.CompositeView.extend({
         triggers: {
             "click .load-more":"search:next-page"
         },
         template: "#search-results-list",
         childView: List.SearchResult,
-        childViewContainer: 'ul'
+        childViewContainer: 'ul',
+        getEmptyView: function() {
+            if(this.collection.query) {
+                return List.EmptyResult;
+            }
+            return null;
+        },
+        toggleLoadMore: function() {
+            if(this.collection.hasNextPage()) {
+                this.$('.load-more').show();
+            } else {
+                this.$('.load-more').hide();
+            }
+        },
+        onRender: function() {
+            this.toggleLoadMore();
+        },
+        onRenderCollection: function() {
+            this.toggleLoadMore();
+        }
     });
 });
