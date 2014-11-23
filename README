@@ -6,5 +6,6 @@ Copy js/config.js.default to js/config.js, and update it with your google API ke
 
 TODO
 - show 'No results found'
+- routes/setting url
 - loader
 - did you mean
