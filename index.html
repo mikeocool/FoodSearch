@@ -1,70 +1,73 @@
-
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Food Search</title>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Food Search</title>
 
-    <!-- Bootstrap -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
-  </head>
-  <body>
-    <div class="container">
-        <div id="main-region"></div>
-    </div>
-
-
-    <script type="text/template" id="search-layout">
-        <div id="search-header"></div>
-        <div id="search-results"></div>
-    </script>
-
-    <script type="text/template" id="search-panel">
-        <div class="panel panel-default">
-            <div class="panel-body">
-                <form class="form-search form-inline">
-                    <div class="input-append">
-                        <input type="text" name="search-term">
-                        <button class="btn" type="submit">Search</button>
-                    </div>
-                </form>
+        <!-- Bootstrap -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+    </head>
+    <body>
+        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+            <div class="container">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="#">Food Search</a> 
+                </div>
             </div>
+        </nav>
+
+        <div class="container">
+            <div id="main-region"></div>
         </div>
-    </script>
 
-    <script type="text/template" id="search-results-list">
-        <ul class="media-list"></ul>
-        <a href="#" class="btn btn-default load-more">Load More</a>
-    </script>
 
-    <script type="text/template" id="search-result-item">
-        <a class="media-left" href="<%= link %>">
-            <img width="80" src="<%= image %>">
-        </a>
-        <div class="media-body">
-            <h4 class="media-heading"><a href="<%= link %>"><%= title %></a></h4>
-            <h6><%= displayLink %></h6>
-            <p><%= snippet %></p>
-        </div>
-        
-    </script>
+        <script type="text/template" id="search-layout">
+            <div id="search-header"></div>
+            <div id="search-results"></div>
+        </script>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.7.0/underscore-min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/backbone.js/1.1.2/backbone-min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/backbone.marionette/2.2.2/backbone.marionette.min.js"></script> 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/backbone.paginator/0.8/backbone.paginator.min.js"></script>
+        <script type="text/template" id="search-form">
+            <form class="form-search form-inline">
+                <div class="input-append">
+                    <input type="text" name="search-term">
+                    <button class="btn" type="submit">Search</button>
+                </div>
+            </form>
+        </script>
 
-    <script src="js/config.js"></script>
-    <script src="js/app.js"></script>
-    <script src="js/entities/search_result.js"></script>
-    <script src="js/search/list/search_controller.js"></script>
-    <script src="js/search/list/search_views.js"></script>
-    <script type="text/javascript">
-        FoodSearchApp.start();
-    </script>
-  </body>
+        <script type="text/template" id="search-results-list">
+            <ul class="media-list"></ul>
+            <a href="#" class="btn btn-default load-more">Load More</a>
+        </script>
+
+        <script type="text/template" id="search-result-item">
+            <a class="media-left" href="<%= link %>">
+                <img width="80" src="<%= image %>">
+            </a>
+            <div class="media-body">
+                <h4 class="media-heading"><a href="<%= link %>"><%= title %></a></h4>
+                <h6><%= displayLink %></h6>
+                <p><%= snippet %></p>
+            </div>
+            
+        </script>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.7.0/underscore-min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/backbone.js/1.1.2/backbone-min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/backbone.marionette/2.2.2/backbone.marionette.min.js"></script> 
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/backbone.paginator/0.8/backbone.paginator.min.js"></script>
+
+        <script src="js/config.js"></script>
+        <script src="js/app.js"></script>
+        <script src="js/entities/search_result.js"></script>
+        <script src="js/search/list/search_controller.js"></script>
+        <script src="js/search/list/search_views.js"></script>
+        <script type="text/javascript">
+            FoodSearchApp.start();
+        </script>
+    </body>
 </html>

@@ -3,3 +3,8 @@ A simple interface for Google Custom Search Engines.
 I use it to search a curated set of food blogs for recipes, hence the name.
 
 Copy js/config.js.default to js/config.js, and update it with your google API key and the CSE's cx id.
+
+TODO
+- show 'No results found'
+- loader
+- did you mean

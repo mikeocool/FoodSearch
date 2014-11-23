@@ -8,7 +8,7 @@ FoodSearchApp.module("Search.List", function(List, FoodSearchApp, Backbone, Mari
     });
 
     List.SearchForm = Marionette.ItemView.extend({
-        template: "#search-panel",
+        template: "#search-form",
         events: {
             "submit form": "search"
         },
