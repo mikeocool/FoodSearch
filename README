@@ -5,6 +5,5 @@ I use it to search a curated set of food blogs for recipes, hence the name.
 Copy js/config.js.default to js/config.js, and update it with your google API key and the CSE's cx id.
 
 TODO
-- routes/setting url
 - loader
 - did you mean

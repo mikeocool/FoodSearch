@@ -1,27 +1,34 @@
-FoodSearchApp.module("Search.List", function(List, App, Backbone, Marionette, $, _) {
+FoodSearchApp.module("Search.List", function(List, FoodSearchApp, Backbone, Marionette, $, _) {
     var ListController = Marionette.Controller.extend({
         show: function() {
-            var collection = App.Entities.SearchResultsCollection; 
+            this.collection = FoodSearchApp.Entities.SearchResultsCollection; 
+
             var searchLayout = new List.Layout();
-            var searchPanelView = new List.SearchForm();
+            this.searchPanelView = new List.SearchForm();
             var searchResultsView = new List.SearchResults({
-                collection: collection
+                collection: this.collection
             });
 
-            searchLayout.on("show", function(){
-                searchLayout.headerRegion.show(searchPanelView);
+            searchLayout.on("show", _.bind(function(){
+                searchLayout.headerRegion.show(this.searchPanelView);
                 searchLayout.resultsRegion.show(searchResultsView);
-            });
+            }, this));
 
             FoodSearchApp.mainRegion.show(searchLayout);
 
-            searchPanelView.on("search:filter", function(searchTerm) {
-                collection.setFilter(searchTerm);
-            });
+            this.searchPanelView.on("search:filter", _.bind(function(searchTerm) {
+                this.filter(searchTerm);
+            }, this));
 
             searchResultsView.on("search:next-page", function() {
                 collection.fetchNextPage();
             });
+        },
+        filter: function(searchTerm) {
+            // TODO update form, and navigate
+            FoodSearchApp.navigate(searchTerm);
+            this.searchPanelView.setSearchTerm(searchTerm);
+            this.collection.setFilter(searchTerm);
         }
     });
 
