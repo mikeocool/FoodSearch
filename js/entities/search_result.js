@@ -63,6 +63,7 @@ FoodSearchApp.module("Entities", function(Entities, FoodSearchApp) {
         setFilter: function(query) {
             this.resetPagination();
             this.query = query;
+            this.trigger('filter:changed');
             this.fetch({reset:true});
         },
         model: function(attrs, options) {

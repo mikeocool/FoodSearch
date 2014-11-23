@@ -4,7 +4,9 @@ FoodSearchApp.module("Search.List", function(List, FoodSearchApp, Backbone, Mari
             this.collection = FoodSearchApp.Entities.SearchResultsCollection; 
 
             var searchLayout = new List.Layout();
-            this.searchPanelView = new List.SearchForm();
+            this.searchPanelView = new List.SearchForm({
+                collection: this.collection
+            });
             var searchResultsView = new List.SearchResults({
                 collection: this.collection
             });
@@ -12,6 +14,7 @@ FoodSearchApp.module("Search.List", function(List, FoodSearchApp, Backbone, Mari
             searchLayout.on("show", _.bind(function(){
                 searchLayout.headerRegion.show(this.searchPanelView);
                 searchLayout.resultsRegion.show(searchResultsView);
+                this.searchPanelView.focus();
             }, this));
 
             FoodSearchApp.mainRegion.show(searchLayout);
@@ -27,7 +30,6 @@ FoodSearchApp.module("Search.List", function(List, FoodSearchApp, Backbone, Mari
         filter: function(searchTerm) {
             // TODO update form, and navigate
             FoodSearchApp.navigate(searchTerm);
-            this.searchPanelView.setSearchTerm(searchTerm);
             this.collection.setFilter(searchTerm);
         }
     });

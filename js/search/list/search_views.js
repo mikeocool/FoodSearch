@@ -12,14 +12,19 @@ FoodSearchApp.module("Search.List", function(List, FoodSearchApp, Backbone, Mari
         events: {
             "submit form": "search"
         },
-        setSearchTerm: function(searchTerm) {
-            this.$('[name=search-term]').val(searchTerm);
+        initialize: function(options) {
+            this.listenTo(this.collection, 'filter:changed', function(){
+                this.$('[name=search-term]').val(this.collection.query);
+            });
         },
         search: function(e) {
             e.preventDefault();    
             searchTerm = this.$('[name=search-term]').val();
             console.log(searchTerm);
             this.trigger("search:filter", searchTerm);
+        },
+        focus: function() {
+            this.$('[name=search-term]').focus();
         }
     });
 
